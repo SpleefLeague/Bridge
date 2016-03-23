@@ -26,6 +26,7 @@ public class Connections {
 
     /**
      * Get singleton Connections instance.
+     *
      * @return instance.
      */
     public static Connections getInstance() {
@@ -34,7 +35,9 @@ public class Connections {
 
     /**
      * Get server redirects.
-     * @return hashmap of server redirects - keys = channels and values = list of servers to send to. If undefined then default to all.
+     *
+     * @return hashmap of server redirects - keys = channels and values = list
+     * of servers to send to. If undefined then default to all.
      */
     public HashMap<String, List<String>> getRedirects() {
         return redirects;
@@ -42,6 +45,7 @@ public class Connections {
 
     /**
      * Get the SocketIO thread.
+     *
      * @return socketio thread, shouldn't be null.
      */
     public SocketIOThread getSocketIOThread() {

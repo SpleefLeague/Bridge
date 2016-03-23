@@ -30,16 +30,16 @@ public class SocketIOThread implements Runnable {
         this.socketIOServer.addEventListener("global", JsonNode.class, (socketIOClient, jsonNode, ackRequest) -> {
             JSONObject jsonObject = new JSONObject(new JSONTokener(jsonNode.toString()));
             String channel = jsonObject.getString("channel");
-            if(channel.equalsIgnoreCase("connect")) {
+            if (channel.equalsIgnoreCase("connect")) {
                 servers.put(jsonObject.getString("name").toLowerCase(), socketIOClient);
-            } else if(Connections.getInstance().getRedirects().containsKey(channel.toLowerCase())) {
+            } else if (Connections.getInstance().getRedirects().containsKey(channel.toLowerCase())) {
                 Connections.getInstance().getRedirects().get(channel.toLowerCase()).stream().filter(servers::containsKey).forEach((String server) -> servers.get(server).sendEvent("global", jsonNode));
             } else {
                 servers.values().forEach(s -> s.sendEvent("global", jsonNode));
             }
         });
         this.socketIOServer.addDisconnectListener(socketIOClient -> {
-            if(servers.containsValue(socketIOClient)) {
+            if (servers.containsValue(socketIOClient)) {
                 servers.values().remove(socketIOClient);
             }
         });
