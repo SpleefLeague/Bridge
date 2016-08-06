@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.spleefleague</groupId>
-    <artifactId>Connections</artifactId>
+    <artifactId>SLBridge</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
@@ -41,7 +41,7 @@
                 <configuration>
                     <archive>
                         <manifestEntries>
-                            <Main-Class>com.spleefleague.connections.Connections</Main-Class>
+                            <Main-Class>com.spleefleague.bridge.SLBridge</Main-Class>
                             <Specification-Version>${maven.build.timestamp}</Specification-Version>
                             <Implementation-Version>${version}</Implementation-Version>
                         </manifestEntries>
@@ -74,6 +74,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>
