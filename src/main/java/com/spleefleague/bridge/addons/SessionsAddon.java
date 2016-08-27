@@ -43,7 +43,7 @@ public class SessionsAddon extends Addon {
                 UUID uuid = UUID.fromString(jsonObject.getString("uuid"));
                 if(SLBridge.getInstance().getSessionManager().hasPlayer(uuid)) {
                     BridgePlayer bridgePlayer = SLBridge.getInstance().getSessionManager().getPlayer(uuid);
-                    if(bridgePlayer.getRank().ordinal() >= Rank.CCMOD.ordinal()) {
+                    if(bridgePlayer.getRank().ordinal() >= Rank.MODERATOR.ordinal()) {
                         JSONObject send = new JSONObject();
                         // Quick workaround for now, requested feature..
                         send.put("message", "§4[§c-§4]§e " + bridgePlayer.getUsername() + " left.");
@@ -73,7 +73,7 @@ public class SessionsAddon extends Addon {
             }
             case GET_STAFF: {
                 JSONObject result = new JSONObject();
-                result.put("staff", SLBridge.getInstance().getSessionManager().getPlayersByRank(Rank.CCMOD, true).stream().map(BridgePlayer::serialize).collect(Collectors.toList()));
+                result.put("staff", SLBridge.getInstance().getSessionManager().getPlayersByRank(Rank.MODERATOR, true).stream().map(BridgePlayer::serialize).collect(Collectors.toList()));
 
                 SocketIOClient socketIOClient = SLBridge.getInstance().getSocketIOThread().getServer(jsonObject.getString("server"));
                 if(socketIOClient != null) {
@@ -93,7 +93,7 @@ public class SessionsAddon extends Addon {
                             rank = Rank.DEFAULT;
                         }
 
-                        if(rank.ordinal() >= Rank.CCMOD.ordinal() && bridgePlayer.getServer().equalsIgnoreCase("PENDING")) {
+                        if(rank.ordinal() >= Rank.MODERATOR.ordinal() && bridgePlayer.getServer().equalsIgnoreCase("PENDING")) {
                             JSONObject send = new JSONObject();
                             // Quick workaround for now, requested feature..
                             send.put("message", "§2[§a+§2]§e " + bridgePlayer.getUsername() + " joined.");
